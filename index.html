@@ -64,13 +64,30 @@
       width: 50%;
     }
 
-    input[type="number"],
-    input[type="text"] {
+    input[type="text"],
+    input[type="number"] {
       width: 100%;
       padding: 10px;
       font-size: 14px;
       border: 1px solid #ccc;
       border-radius: 6px;
+    }
+
+    /* إخفاء الأسهم */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    .english-numbers {
+      font-feature-settings: "lnum";
+      direction: ltr;
+      text-align: left;
+      font-family: Arial, sans-serif;
     }
 
     .copy-icon {
@@ -139,7 +156,7 @@
   <form class="form-content" id="transferForm">
     <div class="info-block">
       <div class="info-label">
-        <span>:رقم الحساب البنكي</span>
+        :رقم الحساب البنكي
       </div>
       <div class="info-input">
         <strong>12727454</strong>
@@ -151,7 +168,7 @@
 
     <div class="info-block">
       <div class="info-label">
-        <span>:الاسم الكامل للمستلم</span>
+        :الاسم الكامل للمستلم
       </div>
       <div class="info-input">
         <strong>M'hamed rabeh</strong>
@@ -163,16 +180,16 @@
 
     <div class="info-block">
       <div class="info-label">
-        <span>:المبلغ (الحد الأدنى 100.00 / الحد الأقصى 5,000.00 MAD)</span>
+        :المبلغ (الحد الأدنى 100.00 / الحد الأقصى 5,000.00 MAD)
       </div>
       <div class="info-input">
-        <input type="number" name="amount" required min="100" max="5000" value="100.00">
+        <input type="number" name="amount" class="english-numbers" min="100" max="5000" value="100.00" required>
       </div>
     </div>
 
     <div class="info-block">
       <div class="info-label">
-        <span>:رقم الحساب البنكي</span>
+        :رقم الحساب البنكي
       </div>
       <div class="info-input">
         <input type="text" name="sender_iban" required>
@@ -181,7 +198,7 @@
 
     <div class="info-block">
       <div class="info-label">
-        <span>:الاسم الكامل لصاحب الحساب</span>
+        :الاسم الكامل لصاحب الحساب
       </div>
       <div class="info-input">
         <input type="text" name="sender_name" required>
