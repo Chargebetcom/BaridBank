@@ -62,7 +62,6 @@
 
     .info-input {
       width: 50%;
-      position: relative;
     }
 
     input[type="text"],
@@ -91,11 +90,6 @@
       font-family: Arial, sans-serif;
     }
 
-    .copy-icon-container {
-      display: inline-block;
-      position: relative;
-    }
-
     .copy-icon {
       display: inline-block;
       vertical-align: middle;
@@ -107,54 +101,22 @@
       height: 20px;
     }
 
-    .copied-msg {
-      font-size: 12px;
-      color: gray;
-      position: absolute;
-      top: -18px;
-      right: 0;
-      display: none;
-    }
-
-    .copied-msg.show {
-      display: block;
-    }
-
     .upload-section {
+      border: 2px dashed #aaa;
+      text-align: center;
+      padding: 25px;
+      border-radius: 10px;
       margin-bottom: 10px;
     }
 
-    .upload-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .upload-section input[type="file"] {
+      display: none;
     }
 
-    .upload-box {
-      width: 80px;
-      height: 80px;
-      border: 2px dashed #aaa;
-      text-align: center;
-      font-size: 36px;
-      color: #777;
+    .upload-section label {
+      font-size: 30px;
+      color: #666;
       cursor: pointer;
-      border-radius: 6px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .upload-box input[type="file"] {
-      display: none;
-    }
-
-    .preview-img {
-      width: 80px;
-      height: 80px;
-      object-fit: cover;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      display: none;
     }
 
     .note {
@@ -178,6 +140,55 @@
     .submit-btn:hover {
       background-color: #27653d;
     }
+
+    /* Toast Notification */
+    .toast {
+      display: none;
+      position: fixed;
+      top: 40%;
+      right: 50%;
+      transform: translate(50%, -50%);
+      background: #fff;
+      color: #333;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      padding: 20px;
+      width: 300px;
+      text-align: center;
+      z-index: 9999;
+    }
+
+    .toast.show {
+      display: block;
+      animation: fadein 0.5s;
+    }
+
+    .toast-title {
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: #444;
+    }
+
+    .toast-message {
+      font-size: 16px;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .toast button {
+      padding: 6px 16px;
+      font-size: 14px;
+      border: none;
+      background-color: #1c4729;
+      color: white;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    @keyframes fadein {
+      from { opacity: 0; transform: translate(50%, -60%); }
+      to { opacity: 1; transform: translate(50%, -50%); }
+    }
   </style>
 </head>
 <body>
@@ -192,62 +203,62 @@
   </div>
 
   <form class="form-content" id="transferForm">
-
     <div class="info-block">
-      <div class="info-label">:رقم الهاتف</div>
+      <div class="info-label">
+        :رقم الحساب البنكي
+      </div>
       <div class="info-input">
-        <strong>0603032807</strong>
-        <span class="copy-icon-container">
-          <span class="copy-icon" onclick="copyText('0603032807', 'copy1')">
-            <img src="https://cdn-icons-png.flaticon.com/512/60/60990.png" alt="copy">
-          </span>
-          <div class="copied-msg" id="copy1">تم النسخ</div>
+        <strong>12727454</strong>
+        <span class="copy-icon" onclick="copyText('12727454')">
+          <img src="https://cdn-icons-png.flaticon.com/512/60/60990.png" alt="copy" />
         </span>
       </div>
     </div>
 
     <div class="info-block">
-      <div class="info-label">:السبب التحويل</div>
+      <div class="info-label">
+        :الاسم الكامل للمستلم
+      </div>
       <div class="info-input">
-        <strong>SRV</strong>
-        <span class="copy-icon-container">
-          <span class="copy-icon" onclick="copyText('SRV', 'copy2')">
-            <img src="https://cdn-icons-png.flaticon.com/512/60/60990.png" alt="copy">
-          </span>
-          <div class="copied-msg" id="copy2">تم النسخ</div>
+        <strong>M'hamed rabeh</strong>
+        <span class="copy-icon" onclick="copyText(M'hamed rabeh)">
+          <img src="https://cdn-icons-png.flaticon.com/512/60/60990.png" alt="copy" />
         </span>
       </div>
     </div>
 
     <div class="info-block">
-      <div class="info-label">:المبلغ (الحد الأدنى 500.00 / الحد الأقصى 10,000.00 MAD)</div>
+      <div class="info-label">
+        :المبلغ (الحد الأدنى 100.00 / الحد الأقصى 5,000.00 MAD)
+      </div>
       <div class="info-input">
-        <input type="number" name="amount" class="english-numbers" min="500" max="10000" value="500.00" required>
+        <input type="number" name="amount" class="english-numbers" min="100" max="5000" value="100.00" required>
       </div>
     </div>
 
     <div class="info-block">
-      <div class="info-label">:رقم الهاتف الخاص بك Cash Plus</div>
+      <div class="info-label">
+        :رقم الحساب البنكي
+      </div>
       <div class="info-input">
-        <input type="text" name="sender_phone" required>
+        <input type="text" name="sender_iban" required>
       </div>
     </div>
 
     <div class="info-block">
-      <div class="info-label">:اسمك الكامل في Cash Plus</div>
+      <div class="info-label">
+        :الاسم الكامل لصاحب الحساب
+      </div>
       <div class="info-input">
         <input type="text" name="sender_name" required>
       </div>
     </div>
 
     <div class="info-block" style="flex-direction: column; align-items: flex-start;">
-      <span style="margin-bottom: 10px;">تنبيه، يرجى تحميل لقطة شاشة للحوالة المصرفية الناجحة:</span>
+      <span style="margin-bottom: 10px;">تنبيه، الرجاء تحميل لقطة شاشة للحوالة المصرفية الناجحة:</span>
       <div class="upload-section">
-        <div class="upload-wrapper">
-          <label class="upload-box" for="proof">+</label>
-          <input type="file" id="proof" name="proof" accept=".jpg,.jpeg,.png,.pdf" onchange="showPreview(event)" required>
-          <img id="preview" class="preview-img" />
-        </div>
+        <label for="proof">+</label>
+        <input type="file" id="proof" name="proof" accept=".jpg,.jpeg,.png,.pdf" required>
       </div>
     </div>
 
@@ -257,30 +268,23 @@
   </form>
 </div>
 
+<!-- Toast -->
+<div class="toast" id="toast">
+  <div class="toast-title">يعرض موقع chargebetcom.github.io</div>
+  <div class="toast-message" id="toastMsg">تم نسخ: </div>
+  <button onclick="closeToast()">حسنا</button>
+</div>
+
 <script>
-  function copyText(value, id) {
+  function copyText(value) {
     navigator.clipboard.writeText(value).then(() => {
-      const msg = document.getElementById(id);
-      msg.classList.add("show");
-      setTimeout(() => {
-        msg.classList.remove("show");
-      }, 2000);
+      document.getElementById("toastMsg").innerText = "تم نسخ: " + value;
+      document.getElementById("toast").classList.add("show");
     });
   }
 
-  function showPreview(event) {
-    const file = event.target.files[0];
-    const preview = document.getElementById("preview");
-    if (file && file.type.startsWith("image/")) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        preview.src = e.target.result;
-        preview.style.display = "block";
-      };
-      reader.readAsDataURL(file);
-    } else {
-      preview.style.display = "none";
-    }
+  function closeToast() {
+    document.getElementById("toast").classList.remove("show");
   }
 
   document.getElementById("transferForm").onsubmit = function(e) {
