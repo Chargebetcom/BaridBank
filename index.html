@@ -62,6 +62,9 @@
 
     .info-input {
       width: 50%;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     input[type="text"],
@@ -92,13 +95,17 @@
 
     .copy-icon {
       display: inline-block;
-      vertical-align: middle;
-      margin-right: 6px;
       cursor: pointer;
     }
 
     .copy-icon img {
       height: 20px;
+    }
+
+    .copied-text {
+      color: green;
+      font-size: 13px;
+      display: none;
     }
 
     .upload-section {
@@ -140,55 +147,6 @@
     .submit-btn:hover {
       background-color: #27653d;
     }
-
-    /* Toast Notification */
-    .toast {
-      display: none;
-      position: fixed;
-      top: 40%;
-      right: 50%;
-      transform: translate(50%, -50%);
-      background: #fff;
-      color: #333;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      padding: 20px;
-      width: 300px;
-      text-align: center;
-      z-index: 9999;
-    }
-
-    .toast.show {
-      display: block;
-      animation: fadein 0.5s;
-    }
-
-    .toast-title {
-      font-size: 14px;
-      margin-bottom: 10px;
-      color: #444;
-    }
-
-    .toast-message {
-      font-size: 16px;
-      margin-bottom: 15px;
-      font-weight: bold;
-    }
-
-    .toast button {
-      padding: 6px 16px;
-      font-size: 14px;
-      border: none;
-      background-color: #1c4729;
-      color: white;
-      border-radius: 20px;
-      cursor: pointer;
-    }
-
-    @keyframes fadein {
-      from { opacity: 0; transform: translate(50%, -60%); }
-      to { opacity: 1; transform: translate(50%, -50%); }
-    }
   </style>
 </head>
 <body>
@@ -204,51 +162,43 @@
 
   <form class="form-content" id="transferForm">
     <div class="info-block">
-      <div class="info-label">
-        :رقم الحساب البنكي
-      </div>
+      <div class="info-label">:رقم الحساب البنكي</div>
       <div class="info-input">
-        <strong>12727454</strong>
-        <span class="copy-icon" onclick="copyText('12727454')">
+        <strong class="english-numbers">12727454</strong>
+        <span class="copy-icon" onclick="copyText(this, '12727454')">
           <img src="https://cdn-icons-png.flaticon.com/512/60/60990.png" alt="copy" />
         </span>
+        <span class="copied-text">تم النسخ</span>
       </div>
     </div>
 
     <div class="info-block">
-      <div class="info-label">
-        :الاسم الكامل للمستلم
-      </div>
+      <div class="info-label">:الاسم الكامل للمستلم</div>
       <div class="info-input">
         <strong>M'hamed rabeh</strong>
-        <span class="copy-icon" onclick="copyText(M'hamed rabeh)">
+        <span class="copy-icon" onclick="copyText(this, M'hamed rabeh)">
           <img src="https://cdn-icons-png.flaticon.com/512/60/60990.png" alt="copy" />
         </span>
+        <span class="copied-text">تم النسخ</span>
       </div>
     </div>
 
     <div class="info-block">
-      <div class="info-label">
-        :المبلغ (الحد الأدنى 100.00 / الحد الأقصى 5,000.00 MAD)
-      </div>
+      <div class="info-label">:المبلغ (الحد الأدنى 100.00 / الحد الأقصى 5,000.00 MAD)</div>
       <div class="info-input">
         <input type="number" name="amount" class="english-numbers" min="100" max="5000" value="100.00" required>
       </div>
     </div>
 
     <div class="info-block">
-      <div class="info-label">
-        :رقم الحساب البنكي
-      </div>
+      <div class="info-label">:رقم الحساب البنكي</div>
       <div class="info-input">
         <input type="text" name="sender_iban" required>
       </div>
     </div>
 
     <div class="info-block">
-      <div class="info-label">
-        :الاسم الكامل لصاحب الحساب
-      </div>
+      <div class="info-label">:الاسم الكامل لصاحب الحساب</div>
       <div class="info-input">
         <input type="text" name="sender_name" required>
       </div>
@@ -263,28 +213,20 @@
     </div>
 
     <div class="note">تحميل الملف .jpg, .jpeg, .png, .pdf - الحجم الأقصى 20 ميغا بايت</div>
-    
+
     <button type="submit" class="submit-btn">التأكيد</button>
   </form>
 </div>
 
-<!-- Toast -->
-<div class="toast" id="toast">
-  <div class="toast-title">يعرض موقع chargebetcom.github.io</div>
-  <div class="toast-message" id="toastMsg">تم نسخ: </div>
-  <button onclick="closeToast()">حسنا</button>
-</div>
-
 <script>
-  function copyText(value) {
+  function copyText(element, value) {
     navigator.clipboard.writeText(value).then(() => {
-      document.getElementById("toastMsg").innerText = "تم نسخ: " + value;
-      document.getElementById("toast").classList.add("show");
+      const message = element.nextElementSibling;
+      message.style.display = 'inline';
+      setTimeout(() => {
+        message.style.display = 'none';
+      }, 1200);
     });
-  }
-
-  function closeToast() {
-    document.getElementById("toast").classList.remove("show");
   }
 
   document.getElementById("transferForm").onsubmit = function(e) {
