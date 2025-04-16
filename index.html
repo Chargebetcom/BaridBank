@@ -64,8 +64,8 @@
       width: 50%;
       display: flex;
       align-items: center;
-      gap: 6px;
-      position: relative;
+      gap: 5px;
+      flex-wrap: wrap;
     }
 
     input[type="text"],
@@ -91,14 +91,13 @@
       font-feature-settings: "lnum";
       direction: ltr;
       text-align: left;
-      font-family: Arial, sans-serif;
     }
 
     .copy-icon {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
       cursor: pointer;
+      color: #1c4729;
     }
 
     .copy-icon img {
@@ -106,8 +105,9 @@
     }
 
     .copied-text {
-      color: green;
       font-size: 13px;
+      color: green;
+      margin-right: 5px;
       display: none;
     }
 
@@ -130,9 +130,9 @@
       align-items: center;
       justify-content: center;
       border-radius: 10px;
-      cursor: pointer;
       font-size: 40px;
       color: #666;
+      cursor: pointer;
     }
 
     .preview-box img {
@@ -164,14 +164,14 @@
       background-color: #27653d;
     }
 
-    .hidden-copy-input {
-      position: absolute;
-      top: -9999px;
-      left: -9999px;
-    }
-
     input[type="file"] {
       display: none;
+    }
+
+    .hidden-copy-input {
+      position: absolute;
+      top: -1000px;
+      left: -1000px;
     }
   </style>
 </head>
@@ -188,43 +188,43 @@
 
   <form class="form-content" id="transferForm">
     <div class="info-block">
-      <div class="info-label">:رقم الحساب البنكي</div>
+      <div class="info-label">رقم الحساب البنكي:</div>
       <div class="info-input">
-        <strong class="english-numbers">12727454</strong>
-        <span class="copy-icon" onclick="copyText(this, '12727454')">
-          <img src="https://cdn-icons-png.flaticon.com/512/60/60990.png" alt="copy" />
+        <span class="english-numbers">12727454</span>
+        <span class="copy-icon" onclick="copyToClipboard(this, '12727454')">
+          <img src="https://cdn-icons-png.flaticon.com/512/60/60990.png" />
           <span class="copied-text">تم النسخ</span>
         </span>
       </div>
     </div>
 
     <div class="info-block">
-      <div class="info-label">:الاسم الكامل للمستلم</div>
+      <div class="info-label">الاسم الكامل للمستلم:</div>
       <div class="info-input">
-        <strong>M'hamed rabeh</strong>
-        <span class="copy-icon" onclick="copyText(this, 'M\'hamed rabeh')">
-          <img src="https://cdn-icons-png.flaticon.com/512/60/60990.png" alt="copy" />
+        <span>M'hamed rabeh</span>
+        <span class="copy-icon" onclick="copyToClipboard(this, M'hamed rabeh)">
+          <img src="https://cdn-icons-png.flaticon.com/512/60/60990.png" />
           <span class="copied-text">تم النسخ</span>
         </span>
       </div>
     </div>
 
     <div class="info-block">
-      <div class="info-label">:المبلغ (الحد الأدنى 100.00 / الحد الأقصى 5,000.00 MAD)</div>
+      <div class="info-label">المبلغ (الحد الأدنى 100 / الحد الأقصى 5000 MAD):</div>
       <div class="info-input">
         <input type="number" name="amount" class="english-numbers" min="100" max="5000" value="100.00" required>
       </div>
     </div>
 
     <div class="info-block">
-      <div class="info-label">:رقم الحساب البنكي</div>
+      <div class="info-label">رقم الحساب البنكي:</div>
       <div class="info-input">
         <input type="text" name="sender_iban" required>
       </div>
     </div>
 
     <div class="info-block">
-      <div class="info-label">:الاسم الكامل لصاحب الحساب</div>
+      <div class="info-label">الاسم الكامل لصاحب الحساب:</div>
       <div class="info-input">
         <input type="text" name="sender_name" required>
       </div>
@@ -233,14 +233,13 @@
     <div class="info-block" style="flex-direction: column; align-items: flex-start;">
       <span style="margin-bottom: 10px;">تنبيه، الرجاء تحميل لقطة شاشة للحوالة المصرفية الناجحة:</span>
       <div class="upload-section">
-        <div class="upload-box" onclick="document.getElementById('proof').click()">+</div>
+        <label class="upload-box" for="proof">+</label>
         <div class="preview-box" id="previewBox" style="display: none;"></div>
         <input type="file" id="proof" name="proof" accept="image/*" required>
       </div>
     </div>
 
     <div class="note">تحميل الملف .jpg, .jpeg, .png - الحجم الأقصى 20 ميغا بايت</div>
-
     <button type="submit" class="submit-btn">التأكيد</button>
   </form>
 </div>
@@ -248,17 +247,14 @@
 <input type="text" id="hiddenCopyInput" class="hidden-copy-input" readonly />
 
 <script>
-  function copyText(element, value) {
-    const hiddenInput = document.getElementById('hiddenCopyInput');
-    hiddenInput.value = value;
-    hiddenInput.select();
+  function copyToClipboard(icon, value) {
+    const input = document.getElementById('hiddenCopyInput');
+    input.value = value;
+    input.select();
     document.execCommand('copy');
-
-    const message = element.querySelector('.copied-text');
-    message.style.display = 'inline';
-    setTimeout(() => {
-      message.style.display = 'none';
-    }, 1200);
+    const msg = icon.querySelector('.copied-text');
+    msg.style.display = 'inline';
+    setTimeout(() => msg.style.display = 'none', 1000);
   }
 
   document.getElementById("proof").addEventListener("change", function (e) {
@@ -274,10 +270,10 @@
     }
   });
 
-  document.getElementById("transferForm").onsubmit = function (e) {
+  document.getElementById("transferForm").addEventListener("submit", function(e) {
     e.preventDefault();
-    alert("سيتم ربط النموذج بالرابط عندما تزودني به.");
-  };
+    alert("سيتم ربط النموذج بالرابط الذي ستزودني به.");
+  });
 </script>
 
 </body>
