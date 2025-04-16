@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تحويل الأموال - Al Barid Bank</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>نموذج تحويل الأموال</title>
   <style>
     * {
       box-sizing: border-box;
@@ -12,7 +12,6 @@
 
     body {
       margin: 0;
-      padding: 0;
       background-color: #d9e3db;
     }
 
@@ -48,20 +47,32 @@
     }
 
     .info-block {
-      margin-bottom: 15px;
       font-size: 15px;
       color: #333;
+      margin-bottom: 12px;
+      position: relative;
     }
 
-    .info-block .copy {
+    .copy-icon {
       display: inline-block;
-      background-color: #e1f4e3;
-      color: #1c4729;
-      padding: 5px 8px;
-      margin-left: 8px;
-      font-size: 13px;
-      border-radius: 4px;
+      vertical-align: middle;
+      margin-right: 6px;
       cursor: pointer;
+    }
+
+    .copy-icon img {
+      height: 20px;
+    }
+
+    .copy-msg {
+      display: none;
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .visible {
+      display: block !important;
     }
 
     input[type="number"],
@@ -128,19 +139,26 @@
 
   <form class="form-content" id="transferForm">
     <div class="info-block">
-      رقم الحساب البنكي:
-      <span style="font-weight:bold;">12727454</span>
-      <span class="copy" onclick="copyText('12727454')">نسخ</span>
+      <span class="copy-icon" onclick="copyText('12727454', 'msg1')">
+        <img src="https://cdn-icons-png.flaticon.com/512/60/60990.png" alt="copy" />
+      </span>
+      <strong>12727454</strong>
+      <span style="margin-right: 5px;">:رقم الحساب البنكي</span>
+      <div id="msg1" class="copy-msg">تم النسخ</div>
     </div>
 
     <div class="info-block">
-      الاسم الكامل للمستلم:
-      <span style="font-weight:bold;">M'hamed rabeh</span>
-      <span class="copy" onclick="copyText('M\'hamed rabeh')">نسخ</span>
+      <span class="copy-icon" onclick="copyText('M\'hamed rabeh', 'msg2')">
+        <img src="https://cdn-icons-png.flaticon.com/512/60/60990.png" alt="copy" />
+      </span>
+      <strong>M'hamed rabeh</strong>
+      <span style="margin-right: 5px;">:الاسم الكامل للمستلم</span>
+      <div id="msg2" class="copy-msg">تم النسخ</div>
     </div>
 
     <div class="info-block">
-      المبلغ (الحد الأدنى 100.00 MAD / الحد الأقصى 5,000.00 MAD):
+      MAD 100.00 (MAD 5,000.00)
+      <br><span style="font-size: 13px; color: #777;">:المبلغ</span>
     </div>
 
     <input type="number" name="amount" required min="100" max="5000" value="100.00">
@@ -161,9 +179,13 @@
 </div>
 
 <script>
-  function copyText(text) {
-    navigator.clipboard.writeText(text).then(() => {
-      alert("تم نسخ: " + text);
+  function copyText(value, msgId) {
+    navigator.clipboard.writeText(value).then(() => {
+      const msg = document.getElementById(msgId);
+      msg.classList.add("visible");
+      setTimeout(() => {
+        msg.classList.remove("visible");
+      }, 2000);
     });
   }
 
