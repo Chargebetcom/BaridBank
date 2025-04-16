@@ -111,19 +111,37 @@
     .upload-section {
       border: 2px dashed #aaa;
       text-align: center;
-      padding: 25px;
+      padding: 15px;
       border-radius: 10px;
       margin-bottom: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     .upload-section input[type="file"] {
       display: none;
     }
 
-    .upload-section label {
-      font-size: 30px;
-      color: #666;
+    .upload-box {
+      width: 100px;
+      height: 100px;
+      background-color: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
       cursor: pointer;
+      font-size: 40px;
+      color: #666;
+    }
+
+    .preview-box img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 10px;
     }
 
     .note {
@@ -213,12 +231,13 @@
     <div class="info-block" style="flex-direction: column; align-items: flex-start;">
       <span style="margin-bottom: 10px;">تنبيه، الرجاء تحميل لقطة شاشة للحوالة المصرفية الناجحة:</span>
       <div class="upload-section">
-        <label for="proof">+</label>
-        <input type="file" id="proof" name="proof" accept=".jpg,.jpeg,.png,.pdf" required>
+        <label class="upload-box" for="proof">+</label>
+        <div class="preview-box" id="previewBox" style="display:none;"></div>
+        <input type="file" id="proof" name="proof" accept=".jpg,.jpeg,.png" required>
       </div>
     </div>
 
-    <div class="note">تحميل الملف .jpg, .jpeg, .png, .pdf - الحجم الأقصى 20 ميغا بايت</div>
+    <div class="note">تحميل الملف .jpg, .jpeg, .png - الحجم الأقصى 20 ميغا بايت</div>
 
     <button type="submit" class="submit-btn">التأكيد</button>
   </form>
@@ -244,6 +263,19 @@
     e.preventDefault();
     alert("سيتم ربط النموذج بالرابط عندما تزودني به.");
   };
+
+  document.getElementById("proof").addEventListener("change", function(e) {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const preview = document.getElementById("previewBox");
+        preview.innerHTML = <img src="${event.target.result}" alt="صورة التحويل">;
+        preview.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    }
+  });
 </script>
 
 </body>
