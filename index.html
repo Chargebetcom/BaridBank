@@ -43,14 +43,34 @@
     }
 
     .form-content {
-      padding: 20px 20px 10px;
+      padding: 20px;
     }
 
     .info-block {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
       font-size: 15px;
       color: #333;
-      margin-bottom: 12px;
-      position: relative;
+    }
+
+    .info-label {
+      width: 45%;
+      text-align: right;
+    }
+
+    .info-input {
+      width: 50%;
+    }
+
+    input[type="number"],
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
     }
 
     .copy-icon {
@@ -62,16 +82,6 @@
 
     .copy-icon img {
       height: 20px;
-    }
-
-    input[type="number"],
-    input[type="text"] {
-      width: 100%;
-      padding: 12px;
-      font-size: 14px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      margin-bottom: 15px;
     }
 
     .upload-section {
@@ -113,55 +123,6 @@
     .submit-btn:hover {
       background-color: #27653d;
     }
-
-    /* Toast Notification Style */
-    .toast {
-      display: none;
-      position: fixed;
-      top: 40%;
-      right: 50%;
-      transform: translate(50%, -50%);
-      background: #fff;
-      color: #333;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      padding: 20px;
-      width: 300px;
-      text-align: center;
-      z-index: 9999;
-    }
-
-    .toast.show {
-      display: block;
-      animation: fadein 0.5s;
-    }
-
-    .toast-title {
-      font-size: 14px;
-      margin-bottom: 10px;
-      color: #444;
-    }
-
-    .toast-message {
-      font-size: 16px;
-      margin-bottom: 15px;
-      font-weight: bold;
-    }
-
-    .toast button {
-      padding: 6px 16px;
-      font-size: 14px;
-      border: none;
-      background-color: #1c4729;
-      color: white;
-      border-radius: 20px;
-      cursor: pointer;
-    }
-
-    @keyframes fadein {
-      from { opacity: 0; transform: translate(50%, -60%); }
-      to { opacity: 1; transform: translate(50%, -50%); }
-    }
   </style>
 </head>
 <body>
@@ -177,35 +138,62 @@
 
   <form class="form-content" id="transferForm">
     <div class="info-block">
-      <span class="copy-icon" onclick="copyText('12727454')">
-        <img src="https://cdn-icons-png.flaticon.com/512/60/60990.png" alt="copy" />
-      </span>
-      <strong>12727454</strong>
-      <span>:رقم الحساب البنكي</span>
+      <div class="info-label">
+        <span>:رقم الحساب البنكي</span>
+      </div>
+      <div class="info-input">
+        <strong>12727454</strong>
+        <span class="copy-icon" onclick="copyText('12727454')">
+          <img src="https://cdn-icons-png.flaticon.com/512/60/60990.png" alt="copy" />
+        </span>
+      </div>
     </div>
 
     <div class="info-block">
-      <span class="copy-icon" onclick="copyText(M'hamed rabeh)">
-        <img src="https://cdn-icons-png.flaticon.com/512/60/60990.png" alt="copy" />
-      </span>
-      <strong>M'hamed rabeh</strong>
-      <span>:الاسم الكامل للمستلم</span>
+      <div class="info-label">
+        <span>:الاسم الكامل للمستلم</span>
+      </div>
+      <div class="info-input">
+        <strong>M'hamed rabeh</strong>
+        <span class="copy-icon" onclick="copyText(M'hamed rabeh)">
+          <img src="https://cdn-icons-png.flaticon.com/512/60/60990.png" alt="copy" />
+        </span>
+      </div>
     </div>
 
     <div class="info-block">
-      MAD 100.00 (MAD 5,000.00)<br>
-      <span style="font-size: 13px; color: #777;">:المبلغ</span>
+      <div class="info-label">
+        <span>:المبلغ (الحد الأدنى 100.00 / الحد الأقصى 5,000.00 MAD)</span>
+      </div>
+      <div class="info-input">
+        <input type="number" name="amount" required min="100" max="5000" value="100.00">
+      </div>
     </div>
 
-    <input type="number" name="amount" required min="100" max="5000" value="100.00">
-    <input type="text" name="sender_iban" placeholder="رقم الحساب البنكي" required>
-    <input type="text" name="sender_name" placeholder="الاسم الكامل لصاحب الحساب البنكي" required>
+    <div class="info-block">
+      <div class="info-label">
+        <span>:رقم الحساب البنكي</span>
+      </div>
+      <div class="info-input">
+        <input type="text" name="sender_iban" required>
+      </div>
+    </div>
 
-    <div class="info-block">تنبيه، الرجاء تحميل لقطة شاشة للحوالة المصرفية الناجحة:</div>
+    <div class="info-block">
+      <div class="info-label">
+        <span>:الاسم الكامل لصاحب الحساب</span>
+      </div>
+      <div class="info-input">
+        <input type="text" name="sender_name" required>
+      </div>
+    </div>
 
-    <div class="upload-section">
-      <label for="proof">+</label>
-      <input type="file" id="proof" name="proof" accept=".jpg,.jpeg,.png,.pdf" required>
+    <div class="info-block" style="flex-direction: column; align-items: flex-start;">
+      <span style="margin-bottom: 10px;">تنبيه، الرجاء تحميل لقطة شاشة للحوالة المصرفية الناجحة:</span>
+      <div class="upload-section">
+        <label for="proof">+</label>
+        <input type="file" id="proof" name="proof" accept=".jpg,.jpeg,.png,.pdf" required>
+      </div>
     </div>
 
     <div class="note">تحميل الملف .jpg, .jpeg, .png, .pdf - الحجم الأقصى 20 ميغا بايت</div>
@@ -214,23 +202,11 @@
   </form>
 </div>
 
-<!-- Toast Notification -->
-<div class="toast" id="toast">
-  <div class="toast-title">يعرض موقع chargebetcom.github.io</div>
-  <div class="toast-message" id="toastMsg">تم نسخ: 12727454</div>
-  <button onclick="closeToast()">حسنا</button>
-</div>
-
 <script>
   function copyText(value) {
     navigator.clipboard.writeText(value).then(() => {
-      document.getElementById("toastMsg").innerText = "تم نسخ: " + value;
-      document.getElementById("toast").classList.add("show");
+      alert("تم نسخ: " + value);
     });
-  }
-
-  function closeToast() {
-    document.getElementById("toast").classList.remove("show");
   }
 
   document.getElementById("transferForm").onsubmit = function(e) {
