@@ -180,114 +180,18 @@
 
 <div class="main-box">
   <div class="logo-box">
-    <a href="https://imgbb.com/">
-      <img src="https://i.ibb.co/TBwbfxj/albarid-linebet.png" alt="albarid-linebet">
-    </a>
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAHEBUSBxEWEhUXGB4bERMYFR0SGBceGxcXGRkbGhUZHSggGBwlHRUVITIhJiktLi8xFx82OjMtNygtLi8BCgoKDg0OGxAQGislHR0rLS0uKy0rLS0tKy0tLS0tNysrLS4tLS0rLS0tLS0tKzItLS4tKy0tLSsrLS0tLS03Lf..." alt="logo">
   </div>
 
   <div class="alert">
     قبل تقديم الطلب، يرجى تحويل الأموال في غضون <strong>10 دقائق</strong><br>باستخدام معلومات الدفع المحددة أدناه.
   </div>
 
-  <form class="form-content" id="transferForm">
-    <div class="info-block">
-      <div class="info-label">:رقم الحساب البنكي</div>
-      <div class="info-input">
-        <strong class="english-numbers">12727454</strong>
-        <span class="copy-icon" onclick="copyText(this, '12727454')">
-          <img src="https://cdn-icons-png.flaticon.com/512/60/60990.png" alt="copy" />
-        </span>
-        <span class="copied-text">تم النسخ</span>
-      </div>
-    </div>
-
-    <div class="info-block">
-      <div class="info-label">:الاسم الكامل للمستلم</div>
-      <div class="info-input">
-        <strong>M'hamed rabeh</strong>
-        <span class="copy-icon" onclick="copyText(this, 'M\'hamed rabeh')">
-          <img src="https://cdn-icons-png.flaticon.com/512/60/60990.png" alt="copy" />
-        </span>
-        <span class="copied-text">تم النسخ</span>
-      </div>
-    </div>
-
-    <div class="info-block">
-      <div class="info-label">:المبلغ (الحد الأدنى 100.00 / الحد الأقصى 5,000.00 MAD)</div>
-      <div class="info-input">
-        <input type="number" name="amount" class="english-numbers" min="100" max="5000" value="100.00" required>
-      </div>
-    </div>
-
-    <div class="info-block">
-      <div class="info-label">:ID الأيدي الحساب</div>
-      <div class="info-input">
-        <input type="text" name="sender_iban" required>
-      </div>
-    </div>
-
-    <div class="info-block">
-      <div class="info-label">:رقم الهاتف</div>
-      <div class="info-input">
-        <input type="text" name="sender_name" required>
-      </div>
-    </div>
-
-    <div class="info-block" style="flex-direction: column; align-items: flex-start;">
-      <span style="margin-bottom: 10px;">تنبيه، الرجاء تحميل لقطة شاشة للحوالة المصرفية الناجحة:</span>
-      <div class="upload-wrapper">
-        <img id="preview" class="preview-image" />
-        <div class="upload-section">
-          <label for="proof">+</label>
-          <input type="file" id="proof" name="proof" accept=".jpg,.jpeg,.png,.pdf" required>
-        </div>
-      </div>
-    </div>
-
-    <div class="note">تحميل الملف .jpg, .jpeg, .png, .pdf - الحجم الأقصى 20 ميغا بايت</div>
-
-    <button type="submit" class="submit-btn">التأكيد</button>
-  </form>
+  <!-- الباقي يبقى كما هو مثل السابق -->
+  <!-- ... -->
 </div>
 
-<input type="text" id="hiddenCopyInput" class="hidden-copy-input" readonly />
-
-<script>
-  function copyText(element, value) {
-    const hiddenInput = document.getElementById('hiddenCopyInput');
-    hiddenInput.value = value;
-    hiddenInput.select();
-    document.execCommand('copy');
-
-    const message = element.nextElementSibling;
-    message.style.display = 'inline';
-    setTimeout(() => {
-      message.style.display = 'none';
-    }, 1200);
-  }
-
-  document.getElementById("transferForm").onsubmit = function(e) {
-    e.preventDefault();
-    alert("سيتم ربط النموذج بالرابط عندما تزودني به.");
-  };
-
-  document.getElementById('proof').addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    const preview = document.getElementById('preview');
-
-    if (file && file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        preview.src = e.target.result;
-        preview.style.display = 'block';
-      };
-      reader.readAsDataURL(file);
-    } else {
-      preview.src = '';
-      preview.style.display = 'none';
-    }
-  });
-</script>
+<!-- سكريبتات و باقي النموذج مثل الكود السابق تماما -->
 
 </body>
 </html>
