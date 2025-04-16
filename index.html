@@ -120,10 +120,6 @@
       flex-wrap: wrap;
     }
 
-    .upload-section input[type="file"] {
-      display: none;
-    }
-
     .upload-box {
       width: 100px;
       height: 100px;
@@ -170,6 +166,10 @@
       position: absolute;
       top: -9999px;
       left: -9999px;
+    }
+
+    input[type="file"] {
+      display: none;
     }
   </style>
 </head>
@@ -232,8 +232,8 @@
       <span style="margin-bottom: 10px;">تنبيه، الرجاء تحميل لقطة شاشة للحوالة المصرفية الناجحة:</span>
       <div class="upload-section">
         <div class="upload-box" onclick="document.getElementById('proof').click()">+</div>
-        <div class="preview-box" id="previewBox" style="display:none;"></div>
-        <input type="file" id="proof" name="proof" accept=".jpg,.jpeg,.png" required>
+        <div class="preview-box" id="previewBox" style="display: none;"></div>
+        <input type="file" id="proof" name="proof" accept="image/*" required>
       </div>
     </div>
 
@@ -259,20 +259,20 @@
     }, 1200);
   }
 
-  document.getElementById("proof").addEventListener("change", function(e) {
+  document.getElementById("proof").addEventListener("change", function (e) {
     const file = e.target.files[0];
     if (file && file.type.startsWith("image/")) {
       const reader = new FileReader();
-      reader.onload = function(event) {
+      reader.onload = function (event) {
         const preview = document.getElementById("previewBox");
         preview.innerHTML = <img src="${event.target.result}" alt="صورة التحويل">;
-        preview.style.display = 'block';
+        preview.style.display = "block";
       };
       reader.readAsDataURL(file);
     }
   });
 
-  document.getElementById("transferForm").onsubmit = function(e) {
+  document.getElementById("transferForm").onsubmit = function (e) {
     e.preventDefault();
     alert("سيتم ربط النموذج بالرابط عندما تزودني به.");
   };
