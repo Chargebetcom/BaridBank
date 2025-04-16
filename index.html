@@ -147,6 +147,12 @@
     .submit-btn:hover {
       background-color: #27653d;
     }
+
+    .hidden-copy-input {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
   </style>
 </head>
 <body>
@@ -218,15 +224,20 @@
   </form>
 </div>
 
+<input type="text" id="hiddenCopyInput" class="hidden-copy-input" readonly />
+
 <script>
   function copyText(element, value) {
-    navigator.clipboard.writeText(value).then(() => {
-      const message = element.nextElementSibling;
-      message.style.display = 'inline';
-      setTimeout(() => {
-        message.style.display = 'none';
-      }, 1200);
-    });
+    const hiddenInput = document.getElementById('hiddenCopyInput');
+    hiddenInput.value = value;
+    hiddenInput.select();
+    document.execCommand('copy');
+
+    const message = element.nextElementSibling;
+    message.style.display = 'inline';
+    setTimeout(() => {
+      message.style.display = 'none';
+    }, 1200);
   }
 
   document.getElementById("transferForm").onsubmit = function(e) {
