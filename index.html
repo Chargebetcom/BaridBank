@@ -65,6 +65,7 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      position: relative;
     }
 
     input[type="text"],
@@ -94,7 +95,9 @@
     }
 
     .copy-icon {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
       cursor: pointer;
     }
 
@@ -110,12 +113,11 @@
 
     .upload-section {
       border: 2px dashed #aaa;
-      text-align: center;
       padding: 15px;
       border-radius: 10px;
       margin-bottom: 10px;
       display: flex;
-      justify-content: center;
+      align-items: center;
       gap: 10px;
       flex-wrap: wrap;
     }
@@ -191,8 +193,8 @@
         <strong class="english-numbers">12727454</strong>
         <span class="copy-icon" onclick="copyText(this, '12727454')">
           <img src="https://cdn-icons-png.flaticon.com/512/60/60990.png" alt="copy" />
+          <span class="copied-text">تم النسخ</span>
         </span>
-        <span class="copied-text">تم النسخ</span>
       </div>
     </div>
 
@@ -202,8 +204,8 @@
         <strong>M'hamed rabeh</strong>
         <span class="copy-icon" onclick="copyText(this, 'M\'hamed rabeh')">
           <img src="https://cdn-icons-png.flaticon.com/512/60/60990.png" alt="copy" />
+          <span class="copied-text">تم النسخ</span>
         </span>
-        <span class="copied-text">تم النسخ</span>
       </div>
     </div>
 
@@ -252,7 +254,7 @@
     hiddenInput.select();
     document.execCommand('copy');
 
-    const message = element.nextElementSibling;
+    const message = element.querySelector('.copied-text');
     message.style.display = 'inline';
     setTimeout(() => {
       message.style.display = 'none';
