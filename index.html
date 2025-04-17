@@ -174,6 +174,25 @@
       top: -9999px;
       left: -9999px;
     }
+
+    #successMessage {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      background-color: #f1f1f1;
+      border-top: 1px solid #ccc;
+    }
+
+    #successMessage img {
+      height: 50px;
+      margin-bottom: 10px;
+    }
+
+    #successMessage p {
+      margin: 0;
+      font-size: 16px;
+      color: #333;
+    }
   </style>
 </head>
 <body>
@@ -246,6 +265,11 @@
 
     <button type="submit" class="submit-btn">التأكيد</button>
   </form>
+
+  <div id="successMessage">
+    <img src="https://i.ibb.co/xq8PQRZx/albarid-linebet.png" alt="barid-logo" />
+    <p>تم إنشاء طلب الإيداع بنجاح.</p>
+  </div>
 </div>
 
 <input type="text" id="hiddenCopyInput" class="hidden-copy-input" readonly />
@@ -294,7 +318,7 @@
         });
 
         const result = await response.text();
-        alert(result);
+        document.getElementById("successMessage").style.display = "block";
         form.reset();
         document.getElementById("preview").style.display = "none";
       } catch (error) {
