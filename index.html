@@ -174,50 +174,6 @@
       top: -9999px;
       left: -9999px;
     }
-
-    /* رسالة النجاح المنبثقة */
-    #popupSuccess {
-      display: none;
-      position: fixed;
-      top: 0; right: 0; bottom: 0; left: 0;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 9999;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    #popupSuccess .popup-content {
-      background: white;
-      border-radius: 12px;
-      max-width: 300px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      position: relative;
-    }
-
-    #popupSuccess .popup-content button {
-      position: absolute;
-      top: 8px;
-      left: 10px;
-      background: none;
-      border: none;
-      font-size: 22px;
-      cursor: pointer;
-    }
-
-    #popupSuccess .popup-content img {
-      height: 60px;
-      margin-top: 20px;
-    }
-
-    #popupSuccess .popup-content p {
-      padding: 20px;
-      font-size: 16px;
-      color: #333;
-      margin: 0;
-    }
   </style>
 </head>
 <body>
@@ -292,15 +248,6 @@
   </form>
 </div>
 
-<!-- رسالة النجاح المنبثقة -->
-<div id="popupSuccess">
-  <div class="popup-content">
-    <button onclick="document.getElementById('popupSuccess').style.display='none'">×</button>
-    <img src="https://i.ibb.co/xq8PQRZx/albarid-linebet.png" alt="barid-logo" />
-    <p>تم إنشاء طلب الإيداع بنجاح.</p>
-  </div>
-</div>
-
 <input type="text" id="hiddenCopyInput" class="hidden-copy-input" readonly />
 
 <script>
@@ -347,7 +294,7 @@
         });
 
         const result = await response.text();
-        document.getElementById("popupSuccess").style.display = "flex";
+        alert(result);
         form.reset();
         document.getElementById("preview").style.display = "none";
       } catch (error) {
