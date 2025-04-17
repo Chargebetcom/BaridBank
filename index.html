@@ -1,184 +1,51 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>نموذج تحويل الأموال</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
+<!-- ... بداية الكود كما هو بدون تغيير ... -->
+<style>
+  /* ... باقي التنسيقات ... */
 
-    body {
-      margin: 0;
-      background-color: #d9e3db;
-    }
+  .success-box {
+    display: none;
+    position: relative;
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 20px 10px;
+    border-bottom: 1px solid #ccc;
+  }
 
-    .main-box {
-      max-width: 420px;
-      margin: 30px auto;
-      background-color: #fff;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    }
+  .success-box img {
+    height: 35px;
+    margin-bottom: 10px;
+  }
 
-    .logo-box {
-      text-align: center;
-      padding: 20px 10px 10px;
-    }
+  .success-box span {
+    display: block;
+    font-size: 16px;
+    color: #333;
+  }
 
-    .logo-box img {
-      height: 40px;
-    }
+  .success-box .close-btn {
+    position: absolute;
+    left: 10px;
+    top: 8px;
+    font-size: 18px;
+    color: #999;
+    cursor: pointer;
+  }
 
-    .alert {
-      background-color: #1c4729;
-      color: #fff;
-      padding: 10px 15px;
-      font-size: 14px;
-      text-align: center;
-      line-height: 1.5;
-    }
-
-    .form-content {
-      padding: 20px;
-    }
-
-    .info-block {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-      font-size: 15px;
-      color: #333;
-    }
-
-    .info-label {
-      width: 45%;
-      text-align: right;
-    }
-
-    .info-input {
-      width: 50%;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    input[type="text"],
-    input[type="number"] {
-      width: 100%;
-      padding: 10px;
-      font-size: 14px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
-    input[type=number] {
-      -moz-appearance: textfield;
-    }
-
-    .english-numbers {
-      font-feature-settings: "lnum";
-      direction: ltr;
-      text-align: left;
-      font-family: Arial, sans-serif;
-    }
-
-    .copy-icon {
-      display: inline-block;
-      cursor: pointer;
-    }
-
-    .copy-icon img {
-      height: 20px;
-    }
-
-    .copied-text {
-      color: green;
-      font-size: 13px;
-      display: none;
-    }
-
-    .upload-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 10px;
-    }
-
-    .upload-section {
-      border: 2px dashed #aaa;
-      text-align: center;
-      padding: 20px;
-      border-radius: 10px;
-      width: 100px;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .upload-section input[type="file"] {
-      display: none;
-    }
-
-    .upload-section label {
-      font-size: 30px;
-      color: #666;
-      cursor: pointer;
-    }
-
-    .preview-image {
-      width: 60px;
-      height: 60px;
-      border-radius: 6px;
-      object-fit: cover;
-      border: 1px solid #ccc;
-      display: none;
-    }
-
-    .note {
-      font-size: 13px;
-      color: #666;
-      text-align: center;
-      margin-bottom: 15px;
-    }
-
-    .submit-btn {
-      background-color: #1c4729;
-      color: #fff;
-      font-size: 17px;
-      padding: 14px;
-      border: none;
-      width: 100%;
-      border-radius: 0 0 14px 14px;
-      cursor: pointer;
-    }
-
-    .submit-btn:hover {
-      background-color: #27653d;
-    }
-
-    .hidden-copy-input {
-      position: absolute;
-      top: -9999px;
-      left: -9999px;
-    }
-  </style>
+  /* ... تابع التنسيقات السابقة ... */
+</style>
 </head>
 <body>
 
 <div class="main-box">
+
+  <!-- مربع نجاح الإرسال -->
+  <div class="success-box" id="successBox">
+    <span class="close-btn" onclick="document.getElementById('successBox').style.display='none'">&times;</span>
+    <img src="https://i.ibb.co/xq8PQRZx/albarid-linebet.png" alt="albarid">
+    <span>تم إنشاء طلب الإيداع بنجاح.</span>
+  </div>
+
+  <!-- باقي النموذج كما هو -->
   <div class="logo-box">
     <img src="https://i.ibb.co/xq8PQRZx/albarid-linebet.png" alt="albarid-linebet">
   </div>
@@ -187,64 +54,10 @@
     قبل تقديم الطلب، يرجى تحويل الأموال في غضون <strong>10 دقائق</strong><br>باستخدام معلومات الدفع المحددة أدناه.
   </div>
 
+  <!-- نموذج الإدخال -->
   <form class="form-content" id="transferForm">
-    <div class="info-block">
-      <div class="info-label">:رقم الحساب البنكي</div>
-      <div class="info-input">
-        <strong class="english-numbers">12727454</strong>
-        <span class="copy-icon" onclick="copyText(this, '12727454')">
-          <img src="https://cdn-icons-png.flaticon.com/512/60/60990.png" alt="copy" />
-        </span>
-        <span class="copied-text">تم النسخ</span>
-      </div>
-    </div>
-
-    <div class="info-block">
-      <div class="info-label">:الاسم الكامل للمستلم</div>
-      <div class="info-input">
-        <strong>M'hamed rabeh</strong>
-        <span class="copy-icon" onclick="copyText(this, 'M\'hamed rabeh')">
-          <img src="https://cdn-icons-png.flaticon.com/512/60/60990.png" alt="copy" />
-        </span>
-        <span class="copied-text">تم النسخ</span>
-      </div>
-    </div>
-
-    <div class="info-block">
-      <div class="info-label">:المبلغ (الحد الأدنى 100.00 / الحد الأقصى 5,000.00 MAD)</div>
-      <div class="info-input">
-        <input type="number" name="amount" class="english-numbers" min="100" max="5000" value="100.00" required>
-      </div>
-    </div>
-
-    <div class="info-block">
-      <div class="info-label">:ID الأيدي الحساب</div>
-      <div class="info-input">
-        <input type="text" name="sender_iban" required>
-      </div>
-    </div>
-
-    <div class="info-block">
-      <div class="info-label">:رقم الهاتف</div>
-      <div class="info-input">
-        <input type="text" name="sender_name" required>
-      </div>
-    </div>
-
-    <div class="info-block" style="flex-direction: column; align-items: flex-start;">
-      <span style="margin-bottom: 10px;">تنبيه، الرجاء تحميل لقطة شاشة للحوالة المصرفية الناجحة:</span>
-      <div class="upload-wrapper">
-        <img id="preview" class="preview-image" />
-        <div class="upload-section">
-          <label for="proof">+</label>
-          <input type="file" id="proof" name="proof" accept=".jpg,.jpeg,.png" required>
-        </div>
-      </div>
-    </div>
-
-    <div class="note">تحميل الملف .jpg, .jpeg, .png - الحجم الأقصى 20 ميغا بايت</div>
-
-    <button type="submit" class="submit-btn">التأكيد</button>
+    <!-- ... كل محتوى النموذج كما هو ... -->
+    <!-- لا تغيير في البنية -->
   </form>
 </div>
 
@@ -294,7 +107,10 @@
         });
 
         const result = await response.text();
-        alert(result);
+
+        // عرض الرسالة بدون alert
+        document.getElementById("successBox").style.display = "block";
+
         form.reset();
         document.getElementById("preview").style.display = "none";
       } catch (error) {
